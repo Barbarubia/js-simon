@@ -15,18 +15,21 @@ Consigli del giorno:
 const numRandomSize = 5;    // quantità di numeri random da generare
 const numRandomMin = 1;     // valore minimo dei numeri random
 const numRandomMax = 99;    // valore massimo dei numeri random
-const arrayNumRandom = [];  // array dei numeri random, inizialmente vuota, da popolare
+const arrayNumRandom = [];  // array dei numeri random, inizialmente vuoto, da popolare
 const eleShowNumbers = document.getElementById('show-numbers-timeout');     // elemento dom che contiene la visualizzazione dei numeri random
 const timeoutDuration = 5 * 1000;      // 30 secondi convertito in millisecondi
+let arrayPlayerNumbers = [];    // array dei numeri digitati dal giocatore, inizialmente vuoto, da popolare
 
 eleShowNumbers.innerHTML = `${numRandomGenerator()}`;       // visualizzazione numeri random nella pagina html
+let scoreCounter = 0        // variabile che conta i numeri indovinati e incrementa il punteggio
+
 
 setTimeout(hideNumbers, timeoutDuration);       // nascondo i numeri random dopo il tempo stabilito
 // FIXME: è ancora possibile continuare a vedere i numeri random nell'inspector
 
-setTimeout(askNumbers, timeoutDuration);        // chiedo al giocatore di inserire i numeri
+setTimeout(playGame, timeoutDuration);        // chiedo al giocatore di inserire i numeri e verifico quanti ne ha indovinati
 
-// Valutare se è meglio fare un'unica funzione che, trascorso il tempo limite, nasconde i numeri random e chiede all'utente di inserire i numeri memorizzati
+// Valutare se è meglio fare un'unica funzione che, trascorso il tempo limite, nasconde i numeri random e avvia il gioco
 
 
 // Funzione che genera 5 numeri random senza ripetizioni
@@ -52,9 +55,23 @@ function hideNumbers() {
     eleShowNumbers.classList.add('display-none');
 }
 
-// Funzione che chiede al giocatore di inserire i numeri
-function askNumbers() {
-    for (let promptIndex=1; promptIndex <= numRandomSize; promptIndex++) {
-        playerNumber = parseInt(prompt(`Digita il ${promptIndex}° numero che hai visualizzato`));
-    }    
+// Funzione che chiede al giocatore di inserire i numeri e controlla quanti ne ha indovinati
+function playGame() {
+    for (let promptIndex = 1; promptIndex <= numRandomSize; promptIndex++) {
+        let playerNumber = prompt(`Digita il ${promptIndex}° numero che hai visualizzato`);
+        // Inserisco il valore digitato nell'array dei numeri del giocatore
+        // Volontariamente consento di inserire più volte lo stesso numero o caratteri diversi da numeri
+        arrayPlayerNumbers.push(playerNumber);
+    }
+    // TEST
+    console.log(arrayPlayerNumbers);
+
+    for (let i = 0; i < arrayPlayerNumbers.length; i++) {
+        if (arrayNumRandom.includes(parseInt(arrayPlayerNumbers[i]))) {
+            scoreCounter++;
+        }
+    }
+    console.log(`Hai indovinato ${scoreCounter} numeri!`);
+    // FIXME: se il giocatore digita più volte lo stesso numero esatto incrementa il contatore
+    return scoreCounter;
 }
