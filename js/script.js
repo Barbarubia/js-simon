@@ -17,15 +17,16 @@ const numRandomMin = 1;     // valore minimo dei numeri random
 const numRandomMax = 99;    // valore massimo dei numeri random
 const arrayNumRandom = [];  // array dei numeri random, inizialmente vuota, da popolare
 const eleShowNumbers = document.getElementById('show-numbers-timeout');     // elemento dom che contiene la visualizzazione dei numeri random
-const timeoutDuration = 30 * 1000;      // 30 secondi convertito in millisecondi
+const timeoutDuration = 5 * 1000;      // 30 secondi convertito in millisecondi
 
 eleShowNumbers.innerHTML = `${numRandomGenerator()}`;       // visualizzazione numeri random nella pagina html
 
 setTimeout(hideNumbers, timeoutDuration);       // nascondo i numeri random dopo il tempo stabilito
 // FIXME: è ancora possibile continuare a vedere i numeri random nell'inspector
 
+setTimeout(askNumbers, timeoutDuration);        // chiedo al giocatore di inserire i numeri
 
-
+// Valutare se è meglio fare un'unica funzione che, trascorso il tempo limite, nasconde i numeri random e chiede all'utente di inserire i numeri memorizzati
 
 
 // Funzione che genera 5 numeri random senza ripetizioni
@@ -49,4 +50,11 @@ console.log(numRandomGenerator());
 // Funzione che nasconde i numeri random dopo il tempo stabilito
 function hideNumbers() {
     eleShowNumbers.classList.add('display-none');
+}
+
+// Funzione che chiede al giocatore di inserire i numeri
+function askNumbers() {
+    for (let promptIndex=1; promptIndex <= numRandomSize; promptIndex++) {
+        playerNumber = parseInt(prompt(`Digita il ${promptIndex}° numero che hai visualizzato`));
+    }    
 }
