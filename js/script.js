@@ -26,6 +26,7 @@ let scoreCounter = 0        // variabile che conta i numeri indovinati e increme
 
 setTimeout(hideNumbers, timeoutDuration);       // nascondo i numeri random dopo il tempo stabilito
 // FIXME: è ancora possibile continuare a vedere i numeri random nell'inspector
+// => FIXED!
 
 setTimeout(playGame, timeoutDuration);        // chiedo al giocatore di inserire i numeri e verifico quanti ne ha indovinati
 
@@ -52,7 +53,9 @@ console.log(numRandomGenerator());
 
 // Funzione che nasconde i numeri random dopo il tempo stabilito
 function hideNumbers() {
+    eleShowNumbers.innerHTML = "";
     eleShowNumbers.classList.add('display-none');
+    // svuoto l'elemento che contiene i numeri così li cancello dall'inspector
 }
 
 // Funzione che chiede al giocatore di inserire i numeri e controlla quanti ne ha indovinati
@@ -71,7 +74,8 @@ function playGame() {
             scoreCounter++;
         }
     }
-    console.log(`Hai indovinato ${scoreCounter} numeri!`);
+    eleShowNumbers.classList.remove('display-none');
+    eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numeri!`;
     // FIXME: se il giocatore digita più volte lo stesso numero esatto incrementa il contatore
     return scoreCounter;
 }
