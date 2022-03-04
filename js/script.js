@@ -73,7 +73,7 @@ function playGame() {
     console.log(arrayPlayerNumbers);
 
     for (let i = 0; i < arrayPlayerNumbers.length; i++) {
-        if (arrayNumRandom.includes(parseInt(arrayPlayerNumbers[i]))) {
+        if (arrayNumRandom[i] == (parseInt(arrayPlayerNumbers[i]))) {
             arrayNumeriIndovinati.push(arrayPlayerNumbers[i])
             scoreCounter++;
         }
