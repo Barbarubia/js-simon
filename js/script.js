@@ -83,4 +83,6 @@ function playGame() {
     eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numeri!<br>${NumeriIndovinati}`;
     // FIXME: se il giocatore digita più volte lo stesso numero esatto incrementa il contatore
     return scoreCounter;
+
+    // TODO: giocatore deve indovinare i numeri nella giusta posizione
 }
