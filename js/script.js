@@ -20,6 +20,7 @@ const eleShowNumbers = document.getElementById('show-numbers-timeout');     // e
 const timeoutDuration = 3 * 1000;      // 30 secondi convertito in millisecondi
 // FIXME: resettare a 30 secondi quando funziona tutto
 let arrayPlayerNumbers = [];    // array dei numeri digitati dal giocatore, inizialmente vuoto, da popolare
+let arrayNumeriIndovinati = []; // array dei numeri indovinati dal giocatore, inizialmente vuoto
 
 eleShowNumbers.innerHTML = `${numRandomGenerator()}`;       // visualizzazione numeri random nella pagina html
 let scoreCounter = 0        // variabile che conta i numeri indovinati e incrementa il punteggio
@@ -73,11 +74,13 @@ function playGame() {
 
     for (let i = 0; i < arrayPlayerNumbers.length; i++) {
         if (arrayNumRandom.includes(parseInt(arrayPlayerNumbers[i]))) {
+            arrayNumeriIndovinati.push(arrayPlayerNumbers[i])
             scoreCounter++;
         }
     }
+    let NumeriIndovinati = `(${arrayNumeriIndovinati})`;
     eleShowNumbers.classList.remove('display-none');
-    eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numeri!`;
+    eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numeri!<br>${NumeriIndovinati}`;
     // FIXME: se il giocatore digita più volte lo stesso numero esatto incrementa il contatore
     return scoreCounter;
 }
