@@ -80,7 +80,11 @@ function playGame() {
     }
     let NumeriIndovinati = `(${arrayNumeriIndovinati})`;
     eleShowNumbers.classList.remove('display-none');
-    eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numeri!<br>${NumeriIndovinati}`;
+    if (scoreCounter == 1) {
+        eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numero!<br>${NumeriIndovinati}`;
+    } else {
+        eleShowNumbers.innerHTML = `Hai indovinato ${scoreCounter} numeri!<br>${NumeriIndovinati}`;
+    }
     // FIXME: se il giocatore digita più volte lo stesso numero esatto incrementa il contatore
     return scoreCounter;
 
